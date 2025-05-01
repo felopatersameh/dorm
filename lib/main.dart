@@ -1,5 +1,5 @@
-import 'package:dorm/Features/Login/Cubit/log_in_cubit.dart';
-import 'package:dorm/Features/Main/Cubit/main_pages_cubit.dart';
+import 'Features/Login/Cubit/log_in_cubit.dart';
+import 'Features/Main/Cubit/main_pages_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Core/Routes/Navigation/navigation_service.dart';

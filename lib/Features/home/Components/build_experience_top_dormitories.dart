@@ -1,4 +1,4 @@
-import 'package:dorm/Core/Components/build_animatedview_list_box.dart';
+import '../../../Core/Components/build_animatedview_list_box.dart';
 
 import '../../../Core/Resources/colors.dart';
 import '../../../Core/Resources/text_style.dart';

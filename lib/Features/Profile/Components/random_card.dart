@@ -1,5 +1,5 @@
-import 'package:dorm/Core/Resources/strings.dart';
-import 'package:dorm/Core/Resources/text_style.dart';
+import '../../../Core/Resources/strings.dart';
+import '../../../Core/Resources/text_style.dart';
 import 'package:flutter/material.dart';
 
 class RandomCard extends StatelessWidget {

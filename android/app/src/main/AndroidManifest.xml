@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="dorm"
+        android:label="Dorm"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

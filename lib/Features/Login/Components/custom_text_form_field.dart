@@ -1,6 +1,6 @@
-import 'package:dorm/Core/Resources/colors.dart';
-import 'package:dorm/Core/Resources/icons.dart';
-import 'package:dorm/Core/Resources/text_style.dart';
+import '../../../Core/Resources/colors.dart';
+import '../../../Core/Resources/icons.dart';
+import '../../../Core/Resources/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {

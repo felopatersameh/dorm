@@ -1,4 +1,4 @@
-import 'package:dorm/Core/Resources/text_style.dart';
+import '../Resources/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomBuildButtonApp extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:dorm/Core/Resources/colors.dart';
-import 'package:dorm/Features/home/Components/build_experience_top_dormitories.dart';
-import 'package:dorm/Features/home/Components/build_property_nearby.dart';
-import 'package:dorm/Features/home/Components/divider_home.dart';
+import '../../../Core/Resources/colors.dart';
+import 'build_experience_top_dormitories.dart';
+import 'build_property_nearby.dart';
+import 'divider_home.dart';
 import 'package:flutter/Material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

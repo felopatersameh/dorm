@@ -1,6 +1,6 @@
-import 'package:dorm/Core/Components/build_animatedview_list_box.dart';
-import 'package:dorm/Features/home/Components/build_card_items.dart';
-import 'package:dorm/Features/home/Components/enum.dart';
+import '../../../Core/Components/build_animatedview_list_box.dart';
+import 'build_card_items.dart';
+import 'enum.dart';
 import 'package:flutter/Material.dart';
 
 class BuildPropertyNearby extends StatelessWidget {

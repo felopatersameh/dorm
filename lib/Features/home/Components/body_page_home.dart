@@ -1,7 +1,6 @@
-import 'package:dorm/Features/home/Components/build_search_bar.dart';
-import 'package:dorm/Features/home/Components/description_in_part_one_page.dart';
-import 'package:dorm/Features/home/Components/expanded_body_page.dart';
-import 'package:dorm/Features/home/Components/logo_home_page.dart';
+import 'build_search_bar.dart';
+import 'expanded_body_page.dart';
+import 'logo_home_page.dart';
 import 'package:flutter/Material.dart';
 
 class BodyPageHome extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:dorm/Core/Resources/colors.dart';
-import 'package:dorm/Core/Resources/icons.dart';
-import 'package:dorm/Core/Resources/strings.dart';
-import 'package:dorm/Features/Main/Cubit/main_pages_cubit.dart';
+import '../../../Core/Resources/colors.dart';
+import '../../../Core/Resources/icons.dart';
+import '../../../Core/Resources/strings.dart';
+import '../Cubit/main_pages_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

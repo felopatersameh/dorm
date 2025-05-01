@@ -1,5 +1,5 @@
-import 'package:dorm/Features/Login/login_page.dart';
-import 'package:dorm/Features/Main/main_pages.dart';
+import '../../Features/Login/login_page.dart';
+import '../../Features/Main/main_pages.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {

@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dorm/Core/Resources/icons.dart';
-import 'package:dorm/Core/Resources/text_style.dart';
+import '../../../Core/Resources/icons.dart';
+import '../../../Core/Resources/text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../Core/Resources/colors.dart';
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {

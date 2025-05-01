@@ -1,6 +1,6 @@
-import 'package:dorm/Core/Resources/icons.dart';
-import 'package:dorm/Core/Routes/app_routes.dart';
-import 'package:dorm/main.dart';
+import '../../../Core/Resources/icons.dart';
+import '../../../Core/Routes/app_routes.dart';
+import '../../../main.dart';
 
 import '../Cubit/log_in_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
