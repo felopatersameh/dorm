@@ -1,0 +1,1 @@
+abstract class NavigationContract {  Future<void> navigateTo(String route, {Object? arguments});  Future<void> replaceWith(String route, {Object? arguments});  Future<void> clearAndNavigateTo(String route, {Object? arguments});  void goBack();  }

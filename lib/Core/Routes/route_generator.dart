@@ -1,0 +1,1 @@
+import 'package:flutter/material.dart';import 'app_routes.dart';class RouteGenerator {  static Route<dynamic> generateRoute(RouteSettings settings) {    return AppRouteBuilders.generateRoute(settings);  }}
