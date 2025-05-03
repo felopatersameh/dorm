@@ -1,7 +1,7 @@
 import '../../../Core/Resources/icons.dart';
-
 import '../../../Core/Resources/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileDetailsWidget extends StatelessWidget {
   final Icon icon;
@@ -32,7 +32,7 @@ class ProfileDetailsWidget extends StatelessWidget {
                     icon,
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                         child: Text(
                           title,
                           maxLines: 1,
@@ -45,14 +45,14 @@ class ProfileDetailsWidget extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon:AppIcons.angleRight ,
+              icon: AppIcons.angleRight,
               onPressed: () {
                 // print('IconButton pressed ...');
               },
             ),
           ],
         ),
-        if (!activeDivider) Divider(height: 1),
+        if (!activeDivider) Divider(height: 1.h),
       ],
     );
   }

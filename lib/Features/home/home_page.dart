@@ -10,13 +10,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(
-        alignment: AlignmentDirectional(0, -1),
-        children: [
-          CoverImageHomePage(),
-          AppConstant.coverColor,
-          BodyPageHome(),
-        ],
+      child: SingleChildScrollView(
+        child: Stack(
+          alignment: AlignmentDirectional(0, -1),
+          children: [
+            CoverImageHomePage(),
+            AppConstant.coverColor,
+            BodyPageHome(),
+          ],
+        ),
       ),
     );
   }

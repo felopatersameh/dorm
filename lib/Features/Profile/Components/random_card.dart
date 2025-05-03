@@ -1,6 +1,7 @@
 import '../../../Core/Resources/strings.dart';
 import '../../../Core/Resources/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RandomCard extends StatelessWidget {
   const RandomCard({super.key});
@@ -8,7 +9,7 @@ class RandomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+      padding: EdgeInsetsDirectional.fromSTEB(24.w, 0, 24.w, 0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -20,11 +21,11 @@ class RandomCard extends StatelessWidget {
               spreadRadius: 4,
             ),
           ],
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: Color(0xffc2c2c2)),
         ),
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: EdgeInsets.all(24.r),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +55,7 @@ class RandomCard extends StatelessWidget {
                           child: Text(
                             AppStrings.descCard,
                             maxLines: 2,
-                           style: AppTextStyle.normal13,
+                            style: AppTextStyle.normal13,
                           ),
                         ),
                       ],

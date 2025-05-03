@@ -1,5 +1,6 @@
 import '../Resources/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -9,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(15.r),
         child: Text(title, style: AppTextStyle.semiBold22Black),
       ),
     );

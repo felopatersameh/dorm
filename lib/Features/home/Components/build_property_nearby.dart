@@ -2,6 +2,7 @@ import '../../../Core/Components/build_animatedview_list_box.dart';
 import 'build_card_items.dart';
 import 'enum.dart';
 import 'package:flutter/Material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BuildPropertyNearby extends StatelessWidget {
   const BuildPropertyNearby({super.key});
@@ -9,7 +10,7 @@ class BuildPropertyNearby extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 100),
+      padding: EdgeInsets.only(bottom: 16.h),
       child: BuildAnimatedview(
         index: 0,
         animationType: AnimationType.bottomToTop,
@@ -17,11 +18,11 @@ class BuildPropertyNearby extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+              padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 16.w),
               child: Text('property nearby'),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 4, 16, 0),
+              padding: EdgeInsets.only(left: 16.w, top: 4.h, right: 16.w),
               child: Text('Convenient stays close to your campus.'),
             ),
             Align(
@@ -29,6 +30,7 @@ class BuildPropertyNearby extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 primary: false,
                 shrinkWrap: true,
+                physics: RangeMaintainingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: 2,
                 itemBuilder:

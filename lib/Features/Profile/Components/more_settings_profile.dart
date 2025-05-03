@@ -12,36 +12,34 @@ class MoreSettingsProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          ProfileDetailsWidget(
-            icon: AppIcons.person,
-            title:AppStrings.profileDetails,
-            activeDivider: false,
-          ),
-          ProfileDetailsWidget(
-            icon:  AppIcons.language,
-            title: AppStrings.language,
-            activeDivider: false,
-          ),
-          ProfileDetailsWidget(
-            icon:  AppIcons.help,
-            title: AppStrings.help,
-            activeDivider: false,
-          ),
-          ProfileDetailsWidget(
-            icon: AppIcons.feedback,
-            title: AppStrings.giveUsFeedback,
-            activeDivider: false,
-          ),
-          ProfileDetailsWidget(
-            icon: AppIcons.logout,
-            title: AppStrings.logOut,
-            activeDivider: true,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        ProfileDetailsWidget(
+          icon: AppIcons.person,
+          title:AppStrings.profileDetails,
+          activeDivider: false,
+        ),
+        ProfileDetailsWidget(
+          icon:  AppIcons.language,
+          title: AppStrings.language,
+          activeDivider: false,
+        ),
+        ProfileDetailsWidget(
+          icon:  AppIcons.help,
+          title: AppStrings.help,
+          activeDivider: false,
+        ),
+        ProfileDetailsWidget(
+          icon: AppIcons.feedback,
+          title: AppStrings.giveUsFeedback,
+          activeDivider: false,
+        ),
+        ProfileDetailsWidget(
+          icon: AppIcons.logout,
+          title: AppStrings.logOut,
+          activeDivider: true,
+        ),
+      ],
     );
   }
 }

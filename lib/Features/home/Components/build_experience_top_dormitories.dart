@@ -13,19 +13,19 @@ class BuildExperienceTopDormitories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 16, 0),
+      padding: EdgeInsets.only(top: 12.r, right: 16.r, bottom: 0),
       child: BuildAnimatedview(
         index: 0,
         animationType: AnimationType.rightToLeft,
         child: Container(
           width: 1.sw,
-          height: 260.h,
+          height: 270.h,
           decoration: BoxDecoration(color: AppColor.secondColors),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                padding: EdgeInsets.only(top: 16.r, left: 16.r, right: 16.r),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -43,7 +43,7 @@ class BuildExperienceTopDormitories extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 4, 16, 0),
+                padding: EdgeInsets.only(top: 4.r, left: 16.r, right: 16.r),
                 child: Text(
                   '30+ student-friendly stays worldwide.',
                   style: AppTextStyle.normal13,

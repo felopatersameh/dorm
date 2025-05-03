@@ -1,3 +1,5 @@
+import 'Features/Maps/cubit/maps_cubit.dart';
+
 import 'Features/Login/Cubit/log_in_cubit.dart';
 import 'Features/Main/Cubit/main_pages_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,14 +27,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-            BlocProvider(create: (_) => LogInCubit()),
-            BlocProvider(create: (_) => MainPagesCubit()),
-          ],
+        BlocProvider(create: (_) => LogInCubit()),
+        BlocProvider(create: (_) => MainPagesCubit()),
+        BlocProvider(create: (_) => MapsCubit()..getlocationData()),
+      ],
       child: ScreenUtilInit(
-        designSize: const Size(
-          AppConstant.designWidth,
-          AppConstant.designHeight,
-        ),
+        designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
         useInheritedMediaQuery: true,

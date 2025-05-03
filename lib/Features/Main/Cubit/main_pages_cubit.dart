@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import '../../../Core/Resources/strings.dart';
 import '../../Favourites/favourites_page.dart';
+import '../../Maps/maps_page.dart';
 import '../../Profile/user_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -36,7 +37,7 @@ class MainPagesCubit extends Cubit<MainPagesState> with WidgetsBindingObserver {
       case 1:
         return FavouritesPage();
       case 2:
-        return widget(404);
+        return MapsPage();
       case 3:
         return ProfilePage();
       default:

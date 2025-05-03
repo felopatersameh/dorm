@@ -41,9 +41,22 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Permissions Locations -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App needs access to location when open.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App needs access to location when in the background.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App needs access to location when open and in the background.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>App needs access to location.</string>
+	
+	
+
 </dict>
 </plist>
