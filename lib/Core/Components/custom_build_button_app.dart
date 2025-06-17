@@ -13,6 +13,7 @@ class CustomBuildButtonApp extends StatelessWidget {
   final double? radius;
   final Color? radiusColor;
   final double? elevation;
+  final bool? looding;
 
   const CustomBuildButtonApp({
     super.key,
@@ -26,7 +27,7 @@ class CustomBuildButtonApp extends StatelessWidget {
     this.radius,
     this.radiusColor,
     this.elevation,
-    this.icon,
+    this.icon, this.looding,
   });
 
   @override
@@ -44,7 +45,7 @@ class CustomBuildButtonApp extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Row(
+      child:looding==true?Center(child: CircularProgressIndicator()): Row(
         mainAxisAlignment:
             isSpace ? MainAxisAlignment.start : MainAxisAlignment.center,
         children: [

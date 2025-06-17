@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppConstant {
-  static const String nameApp = "";
+  static const String nameApp = "Dorm";
   static const double designWidth = 375;
   static const double designHeight = 812;
   static final coverColor = Container(

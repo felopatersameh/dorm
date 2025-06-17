@@ -1,7 +1,10 @@
-import '../../../Core/Components/build_animatedview_list_box.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../Core/Resources/colors.dart';
-import '../../../Core/Resources/text_style.dart';
+import '../../../../Core/Components/build_animatedview_list_box.dart';
+
+import '../../../../Core/Resources/colors.dart';
+import '../../../../Core/Resources/text_style.dart';
+import '../Cubit/home_cubit.dart';
 import 'build_card_items.dart';
 import 'enum.dart';
 import 'package:flutter/Material.dart';
@@ -12,6 +15,7 @@ class BuildExperienceTopDormitories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<HomeCubit>().state;
     return Padding(
       padding: EdgeInsets.only(top: 12.r, right: 16.r, bottom: 0),
       child: BuildAnimatedview(
@@ -50,15 +54,15 @@ class BuildExperienceTopDormitories extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
+                child:state.featuredDorms == null ? Center(child: const CircularProgressIndicator.adaptive()) : ListView.builder(
                   padding: EdgeInsets.zero,
                   primary: false,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 2,
+                  itemCount: state.featuredDorms?.length ?? 0,
                   itemBuilder:
                       (context, index) =>
-                          BuildCardItems(typeCards: TypeCards.small),
+                          BuildCardItems(typeCards: TypeCards.small,dormsModel: state.featuredDorms![index],),
                 ),
               ),
             ],

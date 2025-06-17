@@ -1,16 +1,16 @@
-import '../../../Core/Resources/icons.dart';
-import '../../../Core/Routes/app_routes.dart';
-import '../../../main.dart';
+import '../../../../../Core/Resources/icons.dart';
+import '../../../../../Core/Routes/app_routes.dart';
+import '../../../../../main.dart';
 
-import '../Cubit/log_in_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../Core/Components/custom_build_button_app.dart';
-import '../../../Core/Resources/colors.dart';
-import '../../../Core/Resources/strings.dart';
-import '../../../Core/Resources/text_style.dart';
+import '../../../../../Core/Components/custom_build_button_app.dart';
+import '../../../../../Core/Resources/colors.dart';
+import '../../../../../Core/Resources/strings.dart';
+import '../../../../../Core/Resources/text_style.dart';
+import '../../Components/custom_text_form_field.dart';
 import 'build_text_button.dart';
-import 'custom_text_form_field.dart';
+import '../Cubit/auth_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,9 +26,20 @@ class _FormLoginState extends State<FormLogin> {
   final TextEditingController passController = TextEditingController();
   @override
   void initState() {
+        context.watch<AuthCubit>().state.isPasswordVisible
+        ? context.read<AuthCubit>().changePasswordVisibility()
+        : null;
     emailController.text = "";
     passController.text = "";
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -49,10 +60,10 @@ class _FormLoginState extends State<FormLogin> {
               title: AppStrings.password,
               keyboardType: TextInputType.visiblePassword,
               controller: passController,
-              obscureText: context.watch<LogInCubit>().state.isPasswordVisible,
+              obscureText: context.watch<AuthCubit>().state.isPasswordVisible,
               showSuffix: true,
               onTap:
-                  () => context.read<LogInCubit>().changePasswordVisibility(),
+                  () => context.read<AuthCubit>().changePasswordVisibility(),
             ),
 
             CustomBuildButtonApp(
@@ -71,6 +82,9 @@ class _FormLoginState extends State<FormLogin> {
             BuildTextButton(
               title: AppStrings.orSignUpWith,
               style: AppTextStyle.normal13,
+              onPressed: () {
+                kNavigationService.navigateTo(AppRoutes.register);
+              },
             ),
 
             CustomBuildButtonApp(
@@ -79,7 +93,7 @@ class _FormLoginState extends State<FormLogin> {
               onPressed: () {},
               elevation: 0,
               textColor: AppColor.black,
-              icon:  AppIcons.google,
+              icon: AppIcons.google,
             ),
             10.verticalSpace,
             CustomBuildButtonApp(

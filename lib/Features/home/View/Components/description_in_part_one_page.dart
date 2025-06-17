@@ -1,5 +1,5 @@
-import '../../../Core/Resources/colors.dart';
-import '../../../Core/Resources/text_style.dart';
+import '../../../../Core/Resources/colors.dart';
+import '../../../../Core/Resources/text_style.dart';
 import 'package:flutter/Material.dart';
 
 class DescriptionInPartOnePage extends StatelessWidget {

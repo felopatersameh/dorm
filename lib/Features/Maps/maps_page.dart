@@ -1,3 +1,4 @@
+import '../home/View/Cubit/home_cubit.dart';
 import 'Components/build_dormitory_marker.dart';
 import 'Components/build_user_marker.dart';
 import 'Components/button_get_location.dart';
@@ -11,13 +12,28 @@ import 'package:latlong2/latlong.dart';
 
 import 'cubit/maps_cubit.dart';
 
-class MapsPage extends StatelessWidget {
+class MapsPage extends StatefulWidget {
   const MapsPage({super.key});
+
+  @override
+  State<MapsPage> createState() => _MapsPageState();
+}
+
+class _MapsPageState extends State<MapsPage> {
+  @override
+  void initState() {
+    super.initState();
+    // Fetch location data when the maps page is first loaded
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MapsCubit>().getlocationData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MapsCubit, MapsState>(
       builder: (context, state) {
+       final homeState = context.read<HomeCubit>().state ;
         if (state.locationData == null) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -40,43 +56,32 @@ class MapsPage extends StatelessWidget {
 
               children: [
                 TileLayer(
-                  fallbackUrl: 'https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=6170aad10dfd42a38d4d8c709a536f38',
-                  
+                  fallbackUrl:
+                      'https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=6170aad10dfd42a38d4d8c709a536f38',
+
                   urlTemplate:
                       'https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=6170aad10dfd42a38d4d8c709a536f38',
                   userAgentPackageName: "com.example.dorm",
-               
+
                   tileProvider: NetworkTileProvider(),
                   // Enable file caching
                   keepBuffer: 5,
-
                 ),
 
                 MarkerLayer(markers: [buildUserMarker(state)]),
 
                 MarkerLayer(
+
                   markers: [
-                    buildDormitoryMarker(
-                      LatLng(
-                        state.locationData!.latitude! + 0.002,
-                        state.locationData!.longitude! + 0.002,
+                    if (homeState.nerbyDorms != null)
+                      ...homeState.nerbyDorms!.map(
+                        (dorm) => buildDormitoryMarker(
+                          dorm: dorm,
+                          LatLng(double.parse(dorm.latitude), double.parse(dorm.longitude)),
+                          dorm.name,
+                        ),
                       ),
-                      "Place 1 ",
-                    ),
-                    buildDormitoryMarker(
-                      LatLng(
-                        state.locationData!.latitude! - 0.003,
-                        state.locationData!.longitude! + 0.001,
-                      ),
-                      "Place 2",
-                    ),
-                    buildDormitoryMarker(
-                      LatLng(
-                        state.locationData!.latitude! + 0.001,
-                        state.locationData!.longitude! - 0.002,
-                      ),
-                      "Place 3",
-                    ),
+                  
                   ],
                 ),
               ],
@@ -85,7 +90,9 @@ class MapsPage extends StatelessWidget {
             ButtonGetLocation(),
           ],
         );
+        
       },
+      
     );
   }
 }

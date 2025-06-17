@@ -1,6 +1,13 @@
+import 'package:dorm/Features/home/View/Cubit/home_cubit.dart';
+import 'package:dorm/Features/home/Data/Repo/repository_impl_home.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import 'Core/Storage/Local/local_storage_service.dart';
+import 'Core/Storage/Remote/api_service.dart';
+import 'Features/Auth/Data/Repo/repository_impl.dart';
 import 'Features/Maps/cubit/maps_cubit.dart';
 
-import 'Features/Login/Cubit/log_in_cubit.dart';
+import 'Features/Auth/view/Cubit/auth_in_cubit.dart';
 import 'Features/Main/Cubit/main_pages_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +23,11 @@ import 'package:flutter/material.dart';
 
 final AppNavigationService kNavigationService = AppNavigationService();
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await LocalStorageService.init();
+  await DioHelper.init();
   runApp(const MyApp());
 }
 
@@ -27,9 +38,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => LogInCubit()),
+        BlocProvider(
+          create: (_) => AuthCubit(authRepositoryImpl: AuthRepositoryImpl()),
+        ),
         BlocProvider(create: (_) => MainPagesCubit()),
-        BlocProvider(create: (_) => MapsCubit()..getlocationData()),
+        BlocProvider(create: (_) => MapsCubit()),
+        BlocProvider(create: (_) => HomeCubit(HomeRepositoryImpl())..init()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -47,14 +61,13 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: lightThemes(),
             onGenerateRoute: RouteGenerator.generateRoute,
-            initialRoute: AppRoutes.login,
+            initialRoute: AppRoutes.main,
             navigatorKey: kNavigationService.navigatorKey,
           );
         },
       ),
     );
   }
-
   ThemeData lightThemes() => ThemeData(
     appBarTheme: AppBarTheme(
       backgroundColor: AppColor.secondColors,

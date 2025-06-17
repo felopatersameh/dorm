@@ -1,4 +1,7 @@
-import '../../../Core/Components/build_animatedview_list_box.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../Core/Components/build_animatedview_list_box.dart';
+import '../Cubit/home_cubit.dart';
 import 'build_card_items.dart';
 import 'enum.dart';
 import 'package:flutter/Material.dart';
@@ -9,6 +12,7 @@ class BuildPropertyNearby extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<HomeCubit>().state;
     return Padding(
       padding: EdgeInsets.only(bottom: 16.h),
       child: BuildAnimatedview(
@@ -22,20 +26,20 @@ class BuildPropertyNearby extends StatelessWidget {
               child: Text('property nearby'),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.w, top: 4.h, right: 16.w),
+              padding: EdgeInsets.only(left: 16.w, top: 4.h, right: 16.w, bottom: 16.h),
               child: Text('Convenient stays close to your campus.'),
             ),
             Align(
-              child: ListView.builder(
+              child: state.nerbyDorms == null ? Center(child: const CircularProgressIndicator.adaptive()) :ListView.builder(
                 padding: EdgeInsets.zero,
                 primary: false,
                 shrinkWrap: true,
                 physics: RangeMaintainingScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                itemCount: 2,
+                itemCount: state.nerbyDorms?.length ?? 0,
                 itemBuilder:
                     (context, index) =>
-                        BuildCardItems(typeCards: TypeCards.big),
+                        BuildCardItems(typeCards: TypeCards.big,dormsModel: state.nerbyDorms![index],),
               ),
             ),
           ],

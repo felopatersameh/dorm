@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../../home/home_page.dart';
+import '../../home/View/home_page.dart';
 
 part 'main_pages_state.dart';
 

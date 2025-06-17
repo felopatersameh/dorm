@@ -1,4 +1,4 @@
-import '../../../Core/Resources/colors.dart';
+import '../../../../Core/Resources/colors.dart';
 import 'build_experience_top_dormitories.dart';
 import 'build_property_nearby.dart';
 import 'divider_home.dart';

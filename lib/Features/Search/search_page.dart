@@ -3,8 +3,8 @@ import '../../Core/Resources/colors.dart';
 import 'package:flutter/Material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../home/Components/build_card_items.dart';
-import '../home/Components/enum.dart';
+import '../home/View/Components/build_card_items.dart';
+import '../home/View/Components/enum.dart';
 import 'Components/build_search_bar.dart';
 
 class SearchPage extends StatefulWidget {

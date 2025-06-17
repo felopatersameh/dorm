@@ -1,10 +1,10 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../Search/Components/build_search_bar.dart';
+import '../../../Search/Components/build_search_bar.dart';
 
 import 'package:flutter/Material.dart';
 
-import '../../../Core/Components/build_animatedview_list_box.dart';
+import '../../../../Core/Components/build_animatedview_list_box.dart';
 import 'description_in_part_one_page.dart';
 
 class BuildPartSearchBarHome extends StatelessWidget {

@@ -16,7 +16,6 @@ class BodyPageHome extends StatelessWidget {
         children: [
           LogoHomePage(),
           BuildPartSearchBarHome(),
-      
           ExpandedBodyPage(),
         ],
       ),
