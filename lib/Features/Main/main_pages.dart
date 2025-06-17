@@ -2,7 +2,6 @@ import 'Components/message_internet_connection.dart';
 
 import 'Components/build_bottom_navigation_bar.dart';
 
-import '../../Core/Components/custom_app_bar.dart';
 
 import 'Cubit/main_pages_cubit.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +15,10 @@ class MainPages extends StatelessWidget {
     return BlocBuilder<MainPagesCubit, MainPagesState>(
       builder: (context, state) {
         return Scaffold(
-          appBar:state.index ==0 ? null:
-          CustomAppBar(
-            title: context.watch<MainPagesCubit>().listScreensName(),
-          ),
+          // appBar:state.index ==0 ? null:
+          // CustomAppBar(
+          //   title: context.watch<MainPagesCubit>().listScreensName(),
+          // ),
           body:
               state.internet
                   ? context.watch<MainPagesCubit>().listScreens()

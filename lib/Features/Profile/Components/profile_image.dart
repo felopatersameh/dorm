@@ -1,15 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../Core/Resources/icons.dart';
 import '../../../Core/Resources/text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter/material.dart';
+import '../Cubit/profile_cubit.dart';
 
-class ProfileImage extends StatelessWidget {
+class ProfileImage extends StatefulWidget {
   const ProfileImage({super.key});
 
   @override
+  State<ProfileImage> createState() => _ProfileImageState();
+}
+
+class _ProfileImageState extends State<ProfileImage> {
+  
+
+  @override
   Widget build(BuildContext context) {
+    final currentUser = context.read<ProfileCubit>().state.user;
     return SizedBox(
       height: 180.h,
       width: 1.sw,
@@ -47,23 +57,54 @@ class ProfileImage extends StatelessWidget {
                             ),
                           ),
                           child: Align(
-                            alignment: AlignmentDirectional(0, 0),
                             child: Container(
                               width: 120.w,
                               height: 120.h,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(shape: BoxShape.circle),
-                              child: CachedNetworkImage(
-                                fadeInDuration: const Duration(
-                                  milliseconds: 1400,
-                                ),
-                                fadeOutDuration: const Duration(
-                                  milliseconds: 1400,
-                                ),
-                                imageUrl:
-                                    'https://images.unsplash.com/photo-1588516903720-8ceb67f9ef84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8d29tZW58ZW58MHx8fHwxNzQwMzk2MzYzfDA&ixlib=rb-4.0.3&q=80&w=1080',
-                                fit: BoxFit.contain,
-                              ),
+                              child:
+                                  currentUser?.profileImage == null
+                                      ? Center(
+                                        child: Text(
+                                          (currentUser?.username != null &&
+                                                  currentUser!
+                                                      .username
+                                                      .isNotEmpty)
+                                              ? currentUser.username[0]
+                                                  .toUpperCase()
+                                              : 'U',
+                                          style: AppTextStyle.photos,
+                                        ),
+                                      )
+                                      : CachedNetworkImage(
+                                        fadeInDuration: const Duration(
+                                          milliseconds: 1400,
+                                        ),
+                                        fadeOutDuration: const Duration(
+                                          milliseconds: 1400,
+                                        ),
+                                        imageUrl: currentUser!.profileImage!,
+                                        width: 120.w,
+                                        height: 120.h,
+                                        fit: BoxFit.cover,
+                                        placeholder:
+                                            (context, url) => Container(
+                                              color: Colors.grey[200],
+                                              child: const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            ),
+                                        errorWidget:
+                                            (context, url, error) => Container(
+                                              color: Colors.grey[200],
+                                              child: const Icon(
+                                                Icons.broken_image,
+                                                color: Colors.grey,
+                                                size: 30,
+                                              ),
+                                            ),
+                                      ),
                             ),
                           ),
                         ),
@@ -71,13 +112,13 @@ class ProfileImage extends StatelessWidget {
                       15.verticalSpace,
                       Expanded(
                         child: Text(
-                          'Alexander Smith',
+                          currentUser?.username ?? 'Loading...',
                           style: AppTextStyle.semiBold16,
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          'Alex.SMith@gmail.com',
+                          currentUser?.email ?? 'Loading...',
                           style: AppTextStyle.normal13,
                         ),
                       ),

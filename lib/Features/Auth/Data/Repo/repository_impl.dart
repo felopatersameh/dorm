@@ -1,8 +1,8 @@
-
 import 'package:dartz/dartz.dart';
+import '../../../../Core/Services/user_data_service.dart';
 import '../../../../Core/Storage/Local/local_storage_service.dart';
 import '../../../../Core/Storage/Remote/api_service.dart';
-import '../Model/User_model.dart';
+import '../Model/user_model.dart';
 import '../Model/login_model.dart';
 import '../Model/register_model.dart';
 
@@ -20,16 +20,20 @@ class AuthRepositoryImpl implements AuthRepository {
         data: loginModel.toJson(),
       );
 
-
       if (response.status) {
         final user = UserModel.fromJson(response.data['user']);
+
+        // Save user data to UserDataService
+        await UserDataService.saveUserData(
+          user: user,
+        );
+
+        // Also save to LocalStorageService for backward compatibility
         LocalStorageService.setValue(LocalStorageKeys.idUser, user.id);
         LocalStorageService.setValue(LocalStorageKeys.isLoggedIn, true);
 
-          return Right(user);
-        
-      }
-      else {
+        return Right(user);
+      } else {
         return Left(
           FailureModel(message: response.message, error: response.data),
         );
@@ -53,7 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
         path: ApiEndpoints.register,
         data: registerModel.toJson(),
       );
-       if (response.status) {
+      if (response.status) {
         return const Right(true);
       } else {
         return Left(

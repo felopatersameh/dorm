@@ -7,11 +7,13 @@ class ProfileDetailsWidget extends StatelessWidget {
   final Icon icon;
   final String title;
   final bool activeDivider;
+  final VoidCallback? onTap;
   const ProfileDetailsWidget({
     super.key,
     required this.icon,
     required this.title,
     required this.activeDivider,
+    this.onTap,
   });
 
   @override
@@ -25,7 +27,7 @@ class ProfileDetailsWidget extends StatelessWidget {
           children: [
             Expanded(
               child: GestureDetector(
-                onTap: () {},
+                onTap: onTap,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -44,12 +46,7 @@ class ProfileDetailsWidget extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              icon: AppIcons.angleRight,
-              onPressed: () {
-                // print('IconButton pressed ...');
-              },
-            ),
+            IconButton(icon: AppIcons.angleRight, onPressed: onTap),
           ],
         ),
         if (!activeDivider) Divider(height: 1.h),

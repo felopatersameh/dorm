@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:location/location.dart';
@@ -37,7 +36,6 @@ class HomeCubit extends Cubit<HomeState> {
             featuredDorms.add(element);
           }
         }
-        log(featuredDorms.toString());
         emit(
           state.copyWith(
             isLoading: false,

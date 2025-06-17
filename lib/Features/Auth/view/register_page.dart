@@ -1,5 +1,5 @@
-import '../Components/contauner_background_auth.dart' ;
-import '../Components/form_register.dart';
+import 'Components/contauner_background_auth.dart' ;
+import 'Components/form_register.dart';
 import 'Cubit/auth_in_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

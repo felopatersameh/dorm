@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Core/Components/custom_app_bar.dart';
 import '../../Core/Components/custom_build_button_app.dart';
 import '../../Core/Resources/colors.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../Core/Resources/text_style.dart';
 import '../home/Data/Model/dorms_model.dart';
 import '../home/View/Components/dorm_details_images.dart';
+import '../Favourites/cubit/favorite_cubit.dart';
+import '../Favourites/Repo/repository_impl_favorite.dart';
 
 class InfoPage extends StatelessWidget {
   final DormsModel dorm;
@@ -16,11 +19,31 @@ class InfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(title: "Dormitory Details"),
-      floatingActionButton: _buildFavoriteButton(),
-      body: _buildBody(),
-      persistentFooterButtons: [_buildFooterButton()],
+    return BlocProvider(
+      create:
+          (context) =>
+              FavoriteCubit(RepositoryImplFavorite())
+                ..checkFavoriteStatus(dorm.id),
+      child: BlocListener<FavoriteCubit, FavoriteState>(
+        listener: (context, state) {
+          if (state.message.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor:
+                    state.isFavourite == true ? Colors.green : Colors.orange,
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          }
+        },
+        child: Scaffold(
+          appBar: const CustomAppBar(title: "Dormitory Details"),
+          floatingActionButton: _buildFavoriteButton(),
+          body: _buildBody(),
+          persistentFooterButtons: [_buildFooterButton()],
+        ),
+      ),
     );
   }
 
@@ -48,12 +71,23 @@ class InfoPage extends StatelessWidget {
   }
 
   Widget _buildFavoriteButton() {
-    return FloatingActionButton(
-      onPressed: () {
+    return BlocBuilder<FavoriteCubit, FavoriteState>(
+      builder: (context, state) {
+        final isFavorite = state.isFavourite ?? false;
+
+        return FloatingActionButton(
+          onPressed: () {
+            context.read<FavoriteCubit>().toggleFavorite(dorm);
+          },
+          backgroundColor: AppColor.primaryColors,
+          tooltip: isFavorite ? 'Remove from Favorites' : 'Add to Favorites',
+          child: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: Colors.white,
+            size: 24,
+          ),
+        );
       },
-      backgroundColor: AppColor.primaryColors,
-      tooltip: 'Add to Favorites',
-      child: Icon(Icons.favorite_border, color: Colors.white, size: 24),
     );
   }
 
@@ -134,27 +168,39 @@ class InfoPage extends StatelessWidget {
   }
 
   Widget _buildInlineFavoriteButton() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColor.primaryColors.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(
-          color: AppColor.primaryColors.withValues(alpha: 0.3),
-        ),
-      ),
-      child: IconButton(
-        onPressed: () {
-          // You can implement the favorite logic later
-        },
-        icon: Icon(
-          Icons.favorite_border,
-          color: AppColor.primaryColors,
-          size: 20,
-        ),
-        tooltip: 'Add to Favorites',
-        padding: EdgeInsets.all(8.r),
-        constraints: BoxConstraints(minWidth: 40.w, minHeight: 40.h),
-      ),
+    return BlocBuilder<FavoriteCubit, FavoriteState>(
+      builder: (context, state) {
+        final isFavorite = state.isFavourite ?? false;
+
+        return Container(
+          decoration: BoxDecoration(
+            color:
+                isFavorite
+                    ? AppColor.primaryColors.withValues(alpha: 0.2)
+                    : AppColor.primaryColors.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(8.r),
+            border: Border.all(
+              color:
+                  isFavorite
+                      ? AppColor.primaryColors.withValues(alpha: 0.5)
+                      : AppColor.primaryColors.withValues(alpha: 0.3),
+            ),
+          ),
+          child: IconButton(
+            onPressed: () {
+              context.read<FavoriteCubit>().toggleFavorite(dorm);
+            },
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: AppColor.primaryColors,
+              size: 20,
+            ),
+            tooltip: isFavorite ? 'Remove from Favorites' : 'Add to Favorites',
+            padding: EdgeInsets.all(8.r),
+            constraints: BoxConstraints(minWidth: 40.w, minHeight: 40.h),
+          ),
+        );
+      },
     );
   }
 

@@ -7,7 +7,7 @@ class CustomBuildButtonApp extends StatelessWidget {
   final Color backgroundColor;
   final Widget? icon;
   final Color textColor;
-  final VoidCallback onPressed;
+  final void Function()? onPressed;
   final bool isSpace;
   final Size? size;
   final double? radius;
@@ -44,7 +44,7 @@ class CustomBuildButtonApp extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: onPressed,
+      onPressed: onPressed ?? () {},
       child:looding==true?Center(child: CircularProgressIndicator()): Row(
         mainAxisAlignment:
             isSpace ? MainAxisAlignment.start : MainAxisAlignment.center,

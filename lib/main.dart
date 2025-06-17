@@ -1,9 +1,16 @@
-import 'package:dorm/Features/home/View/Cubit/home_cubit.dart';
-import 'package:dorm/Features/home/Data/Repo/repository_impl_home.dart';
+import 'Features/Favourites/Repo/repository_impl_favorite.dart';
+import 'Features/Favourites/cubit/favorite_cubit.dart';
+import 'Features/Profile/Cubit/profile_cubit.dart';
+import 'Features/Profile/Data/Repo/profile_repository_impl.dart';
+import 'Features/home/View/Cubit/home_cubit.dart';
+import 'Features/home/Data/Repo/repository_impl_home.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'Core/Storage/Local/local_storage_keys.dart';
 import 'Core/Storage/Local/local_storage_service.dart';
 import 'Core/Storage/Remote/api_service.dart';
+import 'Core/Services/local_favorites_service.dart';
+import 'Core/Services/user_data_service.dart';
 import 'Features/Auth/Data/Repo/repository_impl.dart';
 import 'Features/Maps/cubit/maps_cubit.dart';
 
@@ -27,6 +34,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await LocalStorageService.init();
+  await LocalFavoritesService.init();
+  await UserDataService.init();
   await DioHelper.init();
   runApp(const MyApp());
 }
@@ -44,6 +53,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => MainPagesCubit()),
         BlocProvider(create: (_) => MapsCubit()),
         BlocProvider(create: (_) => HomeCubit(HomeRepositoryImpl())..init()),
+        BlocProvider(
+          create:
+              (_) => FavoriteCubit(RepositoryImplFavorite())..getfavourites(),
+        ),
+        BlocProvider(
+          create:
+              (_) =>
+                  ProfileCubit(profileRepository: ProfileRepositoryImpl())
+                    ..loadCurrentUser(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -61,13 +80,25 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: lightThemes(),
             onGenerateRoute: RouteGenerator.generateRoute,
-            initialRoute: AppRoutes.main,
+            initialRoute: getInitialRoute(),
             navigatorKey: kNavigationService.navigatorKey,
           );
         },
       ),
     );
   }
+
+  String getInitialRoute() {
+    final bool isLoggedIn = LocalStorageService.getValue(
+      LocalStorageKeys.isLoggedIn,
+      defaultValue: false,
+    );
+    if (isLoggedIn) {
+      return AppRoutes.main;
+    }
+    return AppRoutes.login;
+  }
+
   ThemeData lightThemes() => ThemeData(
     appBarTheme: AppBarTheme(
       backgroundColor: AppColor.secondColors,

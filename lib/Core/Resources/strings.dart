@@ -1,19 +1,18 @@
 class AppStrings {
-
-  //* login 
-   static String imageLogoAuth = "https://i.postimg.cc/h4y8bW5R/yurtify-logo.png";
-   static String titleLogoAuth = "- YOUR DORM CHOISE -";
-   static String login = "Sign in";
-   static String register = "Register";
-   static String email = "Email";
-   static String name = "Name";
-   static String password = "Password";
-   static String forgotPassword = "Forgot Password";
-   static String orSignUpWith = "Or sign up with";
-   static String alreadyHaveAnAccount = "Already have an account? Sign in";
-   static String continueWithGoogle = "Continue with Google";
-   static String continueWithApple = "Continue with Apple";
-
+  //* login
+  static String imageLogoAuth =
+      "https://i.postimg.cc/h4y8bW5R/yurtify-logo.png";
+  static String titleLogoAuth = "- YOUR DORM CHOISE -";
+  static String login = "Sign in";
+  static String register = "Register";
+  static String email = "Email";
+  static String name = "Name";
+  static String password = "Password";
+  static String forgotPassword = "Forgot Password";
+  static String orSignUpWith = "Or sign up with";
+  static String alreadyHaveAnAccount = "Already have an account? Sign in";
+  static String continueWithGoogle = "Continue with Google";
+  static String continueWithApple = "Continue with Apple";
 
   //* profile
   static String profile = "Profile";
@@ -25,9 +24,18 @@ class AppStrings {
   static String giveUsFeedback = "Give us feedback ";
   static String logOut = "Logout ";
 
-  //* Main 
+  //* Main
   static String home = "Home";
   static String maps = "Maps";
   static String favorite = "Favorite";
-  
+
+  //* User Management
+  static String updateProfile = "Update Profile";
+  static String changePassword = "Change Password";
+  static String currentPassword = "Current Password";
+  static String newPassword = "New Password";
+  static String confirmPassword = "Confirm Password";
+  static String username = "Username";
+  static String profileUpdated = "Profile updated successfully";
+  static String passwordChanged = "Password changed successfully";
 }

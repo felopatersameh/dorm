@@ -1,10 +1,12 @@
-import 'package:dorm/Features/Auth/view/register_page.dart';
+import '../../Features/Auth/view/register_page.dart';
 
 import '../../Features/Search/search_page.dart';
 
 import '../../Features/Info/info_page.dart' as info;
 import '../../Features/Auth/view/login_page.dart';
 import '../../Features/Main/main_pages.dart';
+import '../../Features/Profile/change_password_page.dart';
+import '../../Features/Profile/update_profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../Features/home/Data/Model/dorms_model.dart';
@@ -16,6 +18,8 @@ class AppRoutes {
   static const String main = '/main';
   static const String infoPage = '/InfoPage';
   static const String searchPage = '/SearchPage';
+  static const String updateProfile = '/update-profile';
+  static const String changePassword = '/change-password';
 }
 
 class AppRouteBuilders {
@@ -28,10 +32,14 @@ class AppRouteBuilders {
       case AppRoutes.main:
         return _defaultPageRoute(const MainPages());
       case AppRoutes.infoPage:
-      final dorm = settings.arguments as DormsModel;
-        return _defaultPageRoute(info.InfoPage(dorm: dorm,));
+        final dorm = settings.arguments as DormsModel;
+        return _defaultPageRoute(info.InfoPage(dorm: dorm));
       case AppRoutes.searchPage:
         return _defaultPageRoute(const SearchPage());
+      case AppRoutes.updateProfile:
+        return _defaultPageRoute(const UpdateProfilePage());
+      case AppRoutes.changePassword:
+        return _defaultPageRoute(const ChangePasswordPage());
       default:
         return _errorRoute('No route defined for "${settings.name}"');
     }

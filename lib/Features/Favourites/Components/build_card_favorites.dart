@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Core/Routes/app_routes.dart';
 import '../../../main.dart';
@@ -8,8 +9,12 @@ import '../../../Core/Resources/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../home/Data/Model/dorms_model.dart';
+import '../cubit/favorite_cubit.dart';
+
 class BuildCardFavorites extends StatelessWidget {
-  const BuildCardFavorites({super.key});
+  final DormsModel? dormsModel;
+  const BuildCardFavorites({super.key, this.dormsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -31,48 +36,106 @@ class BuildCardFavorites extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Padding(
-            padding: EdgeInsets.only(left: 12.w, top: 8.h, right: 8.w, bottom: 8.h),
+            padding: EdgeInsets.only(
+              left: 12.w,
+              top: 8.h,
+              right: 8.w,
+              bottom: 8.h,
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Hero(
-                  tag: 'ControllerImage',
+                  tag: 'ControllerImage_${dormsModel?.id}',
                   transitionOnUserGestures: true,
-                  child: CachedNetworkImage(
-                        fadeInDuration: Duration(milliseconds: 1400),
-                        fadeOutDuration: Duration(milliseconds: 1400),
-                    imageUrl: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw2fHxkb3JtfGVufDB8fHx8MTc0MTAwODk5M3ww&ixlib=rb-4.0.3&q=80&w=1080',
-                    width: 90.w,
-                    height: 100.h,
-                    fit: BoxFit.fitWidth,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: CachedNetworkImage(
+                      fadeInDuration: Duration(milliseconds: 1400),
+                      fadeOutDuration: Duration(milliseconds: 1400),
+                      imageUrl:
+                          dormsModel?.firstImage ??
+                          'https://via.placeholder.com/90x100?text=No+Image',
+                      width: 90.w,
+                      height: 100.h,
+                      fit: BoxFit.cover,
+                      placeholder:
+                          (context, url) => Container(
+                            width: 90.w,
+                            height: 100.h,
+                            color: Colors.grey[200],
+                            child: Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          ),
+                      errorWidget:
+                          (context, url, error) => Container(
+                            width: 90.w,
+                            height: 100.h,
+                            color: Colors.grey[200],
+                            child: Icon(
+                              Icons.image_not_supported,
+                              color: Colors.grey,
+                              size: 30,
+                            ),
+                          ),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 12.w, top: 0, right: 0, bottom: 0),
+                    padding: EdgeInsets.only(
+                      left: 12.w,
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                    ),
                     child: Column(
-                      
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Yüksek Öğrenim Kız Öğrenci Yurdu',
+                          dormsModel?.name ?? 'Unknown Dorm',
                           style: AppTextStyle.normal16,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Opacity(
-                          opacity: 0.9,
-                          child: Text(
-                            'Location:Ankara',
-                            style: AppTextStyle.normal13,
-                          ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.location_on,
+                              size: 14,
+                              color: Colors.red,
+                            ),
+                            SizedBox(width: 4.w),
+                            Expanded(
+                              child: Text(
+                                'Location: ${dormsModel?.city ?? 'Unknown'}',
+                                style: AppTextStyle.normal13.copyWith(
+                                  color: Colors.red,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
-                        Opacity(
-                          opacity: 0.4,
-                          child: Text(
-                            'Availability: 5 Rooms available',
-                            style: AppTextStyle.normal13,
-                          ),
+                        Row(
+                          children: [
+                            Icon(Icons.home, size: 14, color: Colors.grey[600]),
+                            SizedBox(width: 4.w),
+                            Expanded(
+                              child: Text(
+                                'Type: ${dormsModel?.dormType ?? 'Unknown'}',
+                                style: AppTextStyle.normal13.copyWith(
+                                  color: Colors.grey[600],
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -95,7 +158,9 @@ class BuildCardFavorites extends StatelessWidget {
                     size: 20,
                   ),
                   onPressed: () {
-                    // print('IconButton pressed ...');
+                    context.read<FavoriteCubit>().deleteFavorite(
+                      dormsModel!.id,
+                    );
                   },
                 ),
               ],

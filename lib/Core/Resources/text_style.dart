@@ -25,6 +25,13 @@ class AppTextStyle {
     color: AppColor.black,
     fontSize: 22.sp,
     fontWeight: FontWeight.w600,
+  );  
+  
+  
+  static TextStyle photos = _default2TextStyle(
+    color: AppColor.black,
+    fontSize: 100.sp,
+    fontWeight: FontWeight.w600,
   );
   static TextStyle semiBold16Black = _default2TextStyle(
     color: AppColor.black,

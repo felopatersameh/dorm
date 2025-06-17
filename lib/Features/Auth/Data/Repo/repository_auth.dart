@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../Core/Storage/Remote/response_model.dart';
-import '../Model/User_model.dart';
+import '../Model/user_model.dart';
 import '../Model/login_model.dart';
 import '../Model/register_model.dart';
 

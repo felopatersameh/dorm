@@ -1,18 +1,19 @@
-import '../../../../Core/Resources/icons.dart';
-import '../../../../main.dart';
+import '../../../../../Core/Resources/icons.dart';
+import '../../../../../main.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../Core/Components/custom_build_button_app.dart';
-import '../../../../Core/Resources/colors.dart';
-import '../../../../Core/Resources/strings.dart';
-import '../../../../Core/Resources/text_style.dart';
+import '../../../../../Core/Components/custom_build_button_app.dart';
+import '../../../../../Core/Resources/colors.dart';
+import '../../../../../Core/Resources/strings.dart';
+import '../../../../../Core/Resources/text_style.dart';
 import 'custom_text_form_field.dart';
-import '../Data/Model/register_model.dart';
-import '../view/Components/build_text_button.dart';
-import '../view/Cubit/auth_in_cubit.dart';
+import '../../Data/Model/register_model.dart';
+import '../Cubit/auth_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'form_login.dart';
 
 class FormRegister extends StatefulWidget {
   const FormRegister({super.key});
@@ -27,9 +28,7 @@ class _FormRegisterState extends State<FormRegister> {
   final TextEditingController nameController = TextEditingController();
   @override
   void initState() {
-    context.watch<AuthCubit>().state.isPasswordVisible
-        ? context.read<AuthCubit>().changePasswordVisibility()
-        : null;
+
     emailController.text = "";
     passController.text = "";
     super.initState();

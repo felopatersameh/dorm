@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:dorm/Core/Routes/app_routes.dart';
+import '../../../../Core/Routes/app_routes.dart';
 import 'package:flutter/Material.dart';
 import '../../Data/Model/login_model.dart';
 import '../../Data/Model/register_model.dart';
@@ -7,6 +7,8 @@ import '../../../../main.dart';
 
 import '../../Data/Model/user_model.dart';
 import '../../Data/Repo/repository_impl.dart';
+import '../../../../Core/Services/user_data_service.dart';
+import '../../../../Core/Storage/Local/local_storage_service.dart';
 
 part 'auth_in_state.dart';
 
@@ -50,5 +52,35 @@ class AuthCubit extends Cubit<AuthState> {
         );
       },
     );
+  }
+
+  Future<void> logout() async {
+    emit(state.copyWith(isLoadingLogin: true));
+
+    try {
+      // Clear user data from UserDataService
+      await UserDataService.clearUserData();
+
+      // Clear local storage for backward compatibility
+      await LocalStorageService.clear();
+
+      // Navigate to login page
+      kNavigationService.clearAndNavigateTo(AppRoutes.login);
+
+      emit(
+        state.copyWith(
+          isLoadingLogin: false,
+          user: null,
+          messageLogin: 'Logged out successfully',
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoadingLogin: false,
+          messageLogin: 'Error during logout: ${e.toString()}',
+        ),
+      );
+    }
   }
 }

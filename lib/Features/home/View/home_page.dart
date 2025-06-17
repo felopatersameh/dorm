@@ -1,4 +1,4 @@
-import 'package:dorm/Features/home/View/Cubit/home_cubit.dart';
+import 'Cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Components/body_page_home.dart';

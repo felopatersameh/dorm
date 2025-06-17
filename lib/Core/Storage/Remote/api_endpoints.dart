@@ -1,5 +1,6 @@
 class ApiEndpoints {
-  static String baseUrl = 'https://firebrick-goose-662141.hostingersite.com/api';
+  static String baseUrl =
+      'https://firebrick-goose-662141.hostingersite.com/api';
   static String login = '/login.php';
   static String register = '/register.php';
   static String getAllDorms = '/get_all_dorms.php';
@@ -7,4 +8,7 @@ class ApiEndpoints {
   static String getFavourites = '/get_favorite_dorms.php';
   static String postFavourites = '/favorite_dorm.php';
 
+  // User management endpoints
+  static String updateProfile = '/update_profile.php';
+  static String changePassword = '/change_password.php';
 }

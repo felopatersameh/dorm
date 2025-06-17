@@ -1,5 +1,5 @@
-import 'package:dorm/Core/Routes/app_routes.dart';
-import 'package:dorm/main.dart';
+import '../../../Core/Routes/app_routes.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
